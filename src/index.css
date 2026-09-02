@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: theme('colors.bg');
+  color: theme('colors.ink');
+  font-family: theme('fontFamily.sans');
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  /* Nav */
+  .nav-bar {
+    @apply fixed top-0 left-0 right-0 z-50 flex justify-between items-center;
+    padding: 1.25rem 4rem;
+    background: #f7f6f3d9;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .nav-bar.scrolled {
+    border-bottom-color: theme('colors.line');
+  }
+
+  /* Eyebrow label with a leading rule */
+  .eyebrow {
+    @apply flex items-center gap-3 text-ink-3 uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+  }
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: theme('colors.ink-3');
+  }
+
+  /* Section eyebrow numbering */
+  .section-label {
+    @apply flex items-center gap-3 text-ink-3 uppercase mb-16;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+  }
+  .section-label::before {
+    content: attr(data-num);
+    font-family: theme('fontFamily.display');
+    font-style: italic;
+    font-size: 0.85rem;
+    color: theme('colors.ink-3');
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Work card grid hairlines */
+  .work-grid {
+    @apply grid grid-cols-1 md:grid-cols-2;
+    gap: 1.5px;
+    background: theme('colors.line');
+  }
+  .work-card {
+    @apply flex flex-col gap-4 bg-bg p-10 cursor-pointer no-underline text-ink;
+    transition: background 0.25s;
+  }
+  .work-card:hover {
+    background: theme('colors.surface');
+  }
+  .work-card:hover .work-card-arrow {
+    transform: translate(3px, -3px);
+    color: theme('colors.ink');
+  }
+  .work-card-arrow {
+    @apply self-end text-ink-3;
+    font-size: 1.2rem;
+    transition: transform 0.2s, color 0.2s;
+  }
+  .stack-pill {
+    @apply text-ink-3 border border-line;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .contact-line {
+    @apply flex flex-col gap-1 pb-6 border-b border-line;
+  }
+  .contact-line:last-child {
+    @apply border-none pb-0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
