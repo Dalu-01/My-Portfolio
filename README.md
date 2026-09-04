@@ -149,6 +149,6 @@ This is a static site — connect the repo to **Vercel** or **Netlify** and both
 
 ## License
 
-© 2026 Dalu. All rights reserved.
+&copy; 2026 Dalu. All rights reserved.
 
 Built with React · TypeScript · Tailwind CSS · Vite.
