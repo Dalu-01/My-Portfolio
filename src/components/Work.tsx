@@ -8,7 +8,7 @@ interface Project {
 
 const PROJECTS: Project[] = [
   {
-    tag: "Development · ongoing",
+    tag: "Development · completed 2026",
     title: "Eventra",
     description:
       "An event-managing platform where people can discover and buy tickets and you can either be an organiser or a user. ",
@@ -33,7 +33,7 @@ const PROJECTS: Project[] = [
   },
 
   {
-    tag: "Development · finished 2026",
+    tag: "Development · completed 2026",
     title: "Task Manager Pro",
     description:
       "A fullstack MERN task manager with JWT authentication, user-scoped tasks, and a soft-delete Trash Page workflow. Built during the Techstudio Internship with a neo-brutalist design system.",
