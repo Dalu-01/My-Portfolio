@@ -11,9 +11,82 @@
       href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
+    <style>
+      #initial-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        place-items: center;
+        background: #f7f6f3;
+        color: #111110;
+        transition: opacity 0.45s ease, visibility 0.45s ease;
+      }
+
+      #initial-loader.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .initial-loader-content {
+        display: grid;
+        justify-items: center;
+        gap: 1rem;
+      }
+
+      .initial-loader-mark {
+        position: relative;
+        display: grid;
+        width: 4rem;
+        height: 4rem;
+        place-items: center;
+        border: 1px solid #e2e0da;
+        border-radius: 999px;
+        font: italic 2rem/1 "DM Serif Display", serif;
+      }
+
+      .initial-loader-mark::after {
+        position: absolute;
+        inset: -1px;
+        border: 1px solid transparent;
+        border-top-color: #c46d4b;
+        border-radius: inherit;
+        content: "";
+        animation: loader-spin 1s linear infinite;
+      }
+
+      .initial-loader-label {
+        color: #9a9a96;
+        font: 0.7rem/1 "Inter", sans-serif;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      @keyframes loader-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #initial-loader {
+          transition: none;
+        }
+
+        .initial-loader-mark::after {
+          animation: none;
+        }
+      }
+    </style>
   </head>
 
   <body class="selection:bg-gray-400 selection:text-white">
+    <div id="initial-loader" role="status" aria-label="Loading Dalu portfolio">
+      <div class="initial-loader-content">
+        <div class="initial-loader-mark" aria-hidden="true">D</div>
+        <span class="initial-loader-label">Loading the good stuff</span>
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

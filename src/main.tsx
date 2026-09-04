@@ -8,3 +8,12 @@ createRoot(document.getElementById('root')!).render(
     <App />
   </StrictMode>
 )
+
+const initialLoader = document.getElementById('initial-loader')
+
+if (initialLoader) {
+  window.setTimeout(() => {
+    initialLoader.classList.add('is-hidden')
+    window.setTimeout(() => initialLoader.remove(), 500)
+  }, 350)
+}

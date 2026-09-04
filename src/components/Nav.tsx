@@ -1,4 +1,3 @@
-import { GiHamburgerMenu } from "react-icons/gi";
 import { useScrolled } from "../hooks/useScrolled";
 import { useState } from "react";
 
@@ -22,24 +21,25 @@ export function Nav() {
         D a l u
       </a>
 
-      {/* MOBILE MENU */}
-        {isMenuOpen && (
-          <div className="absolute top-full w-full bg-[#f7f6f3d9] border-b border-outline md:hidden z-40 transition-all duration-300 ease-out transform">
-            <ul className="flex flex-col p-4 gap-4 list-none">
-              {LINKS.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-ink-2 block py-2 hover:text-ink transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+      <div
+        id="mobile-menu"
+        className={`mobile-menu ${isMenuOpen ? "open" : ""}`}
+        aria-hidden={!isMenuOpen}
+      >
+        <ul>
+          {LINKS.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                tabIndex={isMenuOpen ? 0 : -1}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {/* DESKTOP MENU */}
       <ul className="hidden md:flex gap-8 list-none">
@@ -58,10 +58,13 @@ export function Nav() {
       <div className="md:hidden">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="p-2 text-ink-3 hover:text-ink transition-colors"
-          aria-label="Toggle menu"
+          className={`menu-toggle ${isMenuOpen ? "open" : ""}`}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-menu"
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
-          <GiHamburgerMenu />
+          <span />
+          <span />
         </button>
       </div>
     </nav>

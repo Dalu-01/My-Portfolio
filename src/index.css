@@ -4,6 +4,26 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-color: #111110 #f7f6f3;
+  scrollbar-width: thin;
+}
+
+html::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #f7f6f3;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #111110;
+  border: 3px solid #f7f6f3;
+  border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #5a5a57;
 }
 
 body {
@@ -21,10 +41,91 @@ body {
     background: #f7f6f3d9;
     backdrop-filter: blur(12px);
     border-bottom: 1px solid transparent;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, background-color 0.3s;
   }
   .nav-bar.scrolled {
     border-bottom-color: theme('colors.line');
+  }
+
+  .mobile-menu {
+    @apply absolute left-0 top-full w-full md:hidden;
+    overflow: hidden;
+    max-height: 0;
+    border-bottom: 1px solid transparent;
+    background: #f7f6f3f2;
+    backdrop-filter: blur(16px);
+    opacity: 0;
+    transform: translateY(-0.75rem);
+    pointer-events: none;
+    transition: max-height 0.4s ease, opacity 0.3s ease,
+      transform 0.4s ease, border-color 0.3s ease;
+  }
+  .mobile-menu.open {
+    max-height: 22rem;
+    border-bottom-color: theme('colors.line');
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .mobile-menu ul {
+    @apply list-none;
+    margin: 0;
+    padding: 0.75rem 1.25rem 1.25rem;
+  }
+  .mobile-menu li {
+    border-bottom: 1px solid theme('colors.line');
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    transition: opacity 0.25s ease, transform 0.35s ease;
+  }
+  .mobile-menu li:last-child {
+    border-bottom: none;
+  }
+  .mobile-menu.open li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .mobile-menu.open li:nth-child(1) { transition-delay: 0.05s; }
+  .mobile-menu.open li:nth-child(2) { transition-delay: 0.1s; }
+  .mobile-menu.open li:nth-child(3) { transition-delay: 0.15s; }
+  .mobile-menu.open li:nth-child(4) { transition-delay: 0.2s; }
+  .mobile-menu a {
+    @apply flex items-center justify-between text-ink no-underline uppercase;
+    padding: 1rem 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+  }
+  .mobile-menu a::after {
+    content: '↗';
+    color: theme('colors.ink-3');
+    font-size: 1rem;
+  }
+  .menu-toggle {
+    @apply relative flex h-10 w-10 flex-col items-center justify-center gap-1.5;
+    border: 1px solid theme('colors.line');
+    border-radius: 999px;
+    background: transparent;
+    color: theme('colors.ink');
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+  }
+  .menu-toggle:hover,
+  .menu-toggle.open {
+    border-color: theme('colors.ink');
+    background: theme('colors.ink');
+    color: theme('colors.bg');
+  }
+  .menu-toggle span {
+    display: block;
+    width: 1rem;
+    height: 1px;
+    background: currentColor;
+    transition: transform 0.3s ease;
+  }
+  .menu-toggle.open span:first-child {
+    transform: translateY(2.5px) rotate(45deg);
+  }
+  .menu-toggle.open span:last-child {
+    transform: translateY(-2.5px) rotate(-45deg);
   }
 
   /* Eyebrow label with a leading rule */
@@ -103,10 +204,23 @@ body {
   }
 }
 
+@media (max-width: 767px) {
+  .nav-bar {
+    padding: 1rem 1.25rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     transform: none;
+    transition: none;
+  }
+
+  .mobile-menu,
+  .mobile-menu li,
+  .menu-toggle,
+  .menu-toggle span {
     transition: none;
   }
 }
