@@ -21,7 +21,7 @@ const PROJECTS: Project[] = [
       "Shad-cn",
       "Tanstack Query",
     ],
-    href: "#",
+    href: "https://eventra-client-delta.vercel.app/",
   },
   {
     tag: "Development · ongoing",
